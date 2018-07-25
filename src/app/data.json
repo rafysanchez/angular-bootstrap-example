@@ -1,35 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import {Http} from "@angular/http";
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: [
-    `.logo {
-      max-height: 30px;
-      padding-bottom: 5px;
-    }`
-  ]
-})
-export class AppComponent {
-  public modalRef: BsModalRef;
-
-
-  public data;
-  public filterQuery = "";
-  public rowsOnPage = 10;
-  public sortBy = "email";
-  public sortOrder = "asc";
-
-
-
-  constructor(private modalService: BsModalService) {
-
-setTimeout(()=>{
-  this.data = [
-    {'name':'alea', 'email':'asasa@asas.com', 'regDate':'12/02/2018', 'city':'dinamitina', 'age':'21'},
-    {'name':'xania', 'email':'xania@asas.com', 'regDate':'12/03/2018','city':'garatai', 'age':'25'},
+[
     {
       "name": "Wing",
       "email": "tellus.eu.augue@arcu.com",
@@ -729,29 +698,5 @@ setTimeout(()=>{
       "regDate": "2015-06-24T14:38:07-07:00",
       "city": "Kobbegem",
       "age": 22
-    },1000
-    ];
-})
-
-
-  }
-
-  public openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
-  public toInt(num: string) {
-    return +num;
-  }
-
-  public sortByWordLength = (a: any) => {
-      return a.city.length;
-  }
-
-
-  remove(i:any){
-
-
-}
-
-}
+    }
+  ]

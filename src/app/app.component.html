@@ -1,22 +1,22 @@
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand"><img src="assets/img/ngx-bootstrap.svg" class="logo"></a>
-            <span class="navbar-brand">Angular + Bootstrap</span>
+            <span class="navbar-brand">Exemplo Angular com  Bootstrap </span>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
+            <li class="active"><a href="#">Nossa Empresa <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Portfolio</a></li>
             <li dropdown>
-                <a dropdownToggle class="dropdown-toggle" role="button">Dropdown <span class="caret"></span></a>
+                <a dropdownToggle class="dropdown-toggle" role="button">Outros Assuntos <span class="caret"></span></a>
                 <ul *dropdownMenu class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Clientes</a></li>
+                    <li><a href="#">Produtos</a></li>
+                    <li><a href="#">Fornecedores</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">Atacadistas</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href="#">Varejistas</a></li>
                 </ul>
             </li>
         </ul>
@@ -26,21 +26,121 @@
 <div class="container">
 
     <button type="button" class="btn btn-primary" tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-    Button with tooltip
+    Botao com tooltip
     </button>
 
-    <button type="button" class="btn btn-info" (click)="openModal(template)">Create template modal</button>
+    <button type="button" class="btn btn-info" (click)="openModal(template)">Abrir modal</button>
 
     <ng-template #template>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">Modal</h4>
+            <h4 class="modal-title pull-left">Exemplo de Modal</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
          <span aria-hidden="true">&times;</span>
        </button>
         </div>
         <div class="modal-body">
-            This is a modal.
+            This is a modal kkkkkk.
         </div>
     </ng-template>
 
+</div> -->
+
+
+
+
+<div class="container-fluid">
+    <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+        <div class="page-header">
+            <h1>
+                <span>Angular2 DataTable component</span><br/>
+                
+            </h1>
+        </div>
+
+
+        <div class="row">
+            <h2 class="col-xs-6">Simple data table</h2>
+            <div class="col-xs-2">
+                <label class="label-control">Rows on page</label>
+                <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+            </div>
+            <div class="col-xs-4">
+                <div class="row">
+                    <label class="col-xs-12 label-control">Sort by</label>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortBy">
+                            <option ngValue="name">Name</option>
+                            <option ngValue="email">Email</option>
+                            <option ngValue="age">Age</option>
+                            <option [ngValue]="sortByWordLength">City</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortOrder">
+                            <option ngValue="asc">Ascending</option>
+                            <option ngValue="desc">Descending</option>
+                            <!--<option ngValue="badValue">Bad value</option> -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">User information</div>
+
+            <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                <tr>
+                    <th style="width: 10%"></th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                    </th>
+                    <th style="width: 40%">
+                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        Filter by name:
+                        <input class="form-control" [(ngModel)]="filterQuery"/>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data">
+                    <td>
+                        <button (click)="remove(item)" class="btn btn-danger">x</button>
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td class="text-right">{{item.age}}</td>
+                    <td>{{item.city | uppercase}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </div>
